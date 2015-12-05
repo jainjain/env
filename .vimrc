@@ -23,7 +23,6 @@ Bundle 'cschlueter/vim-mustang'
 Bundle 'godlygeek/csapprox'
 
 " Utilities
-Bundle "tsaleh/vim-matchit"
 Bundle 'Raimondi/delimitMate'
 
 " Syntax Commenter
@@ -158,6 +157,7 @@ set shell=/bin/bash
 
 set guioptions-=T
 set background=dark
+set t_Co=88
 let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
 colorscheme mustang
 set nonu
