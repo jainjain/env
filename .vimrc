@@ -1,6 +1,6 @@
 set nocompatible " be iMproved
 filetype off                   " required!
-
+set t_Co=256  
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -17,12 +17,14 @@ Bundle 'fholgado/minibufexpl.vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'sjl/gundo.vim'
+Bundle 'digitaltoad/vim-jade'
 
 " Color scheme
 Bundle 'cschlueter/vim-mustang'
 Bundle 'godlygeek/csapprox'
 
 " Utilities
+" Bundle "tsaleh/vim-matchit"
 Bundle 'Raimondi/delimitMate'
 
 " Syntax Commenter
@@ -38,12 +40,16 @@ Bundle 'scrooloose/syntastic'
 
 " Python Syntax Checker
 Bundle 'kevinw/pyflakes-vim'
-Bundle 'vim-scripts/pep8'
 Bundle 'vim-scripts/Pydiction'
 Bundle "vim-scripts/indentpython.vim"
 
 " Versioning System
 Bundle 'tpope/vim-fugitive'
+
+Bundle 'fatih/vim-go'
+Bundle 'jreybert/vimagit'
+
+
 
 filetype plugin indent on     " required! 
 
@@ -132,11 +138,13 @@ set so=7            " Set 7 lines to the curors - when moving vertical..
 set ruler           "Always show current position
 set hid             "Change buffer - without saving
 set nohidden
-set mouse=a
+if has('mouse')
+    set mouse=a
+endif
 
 " Set backspace config
 set backspace=eol,start,indent
-" set whichwrap+=<,>,h,l
+set whichwrap+=<,>,h,l
 
 set nolazyredraw "Don't redraw while executing macros 
 set magic "Set magic on, for regular expressions
@@ -157,7 +165,6 @@ set shell=/bin/bash
 
 set guioptions-=T
 set background=dark
-set t_Co=88
 let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
 colorscheme mustang
 set nonu
@@ -232,11 +239,11 @@ set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
 set pastetoggle=<F3>          " Press F3 for toggle paste mode
 set cursorline
-set colorcolumn=80 " Mark 80th column with a red line
+""set colorcolumn=80 " Mark 80th column with a red line
 
 " Taken From http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
 autocmd FileType python highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
-autocmd FileType python match OverLength /\%81v.\+/
+""autocmd FileType python match OverLength /\%81v.\+/
 
 " Paste using ,v in normal mode
 nnoremap <leader>v "+gP
@@ -253,6 +260,7 @@ inoremap <C-v> <ESC>:set paste<CR>"+gp<ESC>:set nopaste<ENTER>i<RIGHT>
 " have further <tab>s cycle through the possibilities:
 set wildmode=list:longest,full
 
+"set nowrap          " no line wrapping;
 set guioptions+=b   " add a horizontal scrollbar to the bottom
 
 "--- search options ------------
@@ -500,7 +508,7 @@ autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 " Use leader + . for opening File Explorer
 map <leader>t :NERDTreeTabsToggle<CR>
 let g:NERDTreeShowBookmarks=1
-let g:NERDTreeMouseMode=3
+"let g:NERDTreeMouseMode=3
 let g:NERDTreeWinSize=30
 
 " Close all open buffers on entering a window if the only
